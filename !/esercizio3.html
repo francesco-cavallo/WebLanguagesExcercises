@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+    <body>
+    inizio documento
+    <hr/>
+    <select name="menuDoc">
+        <option value="doc1">doc1</option>
+        <option value="doc2">doc2</option>
+        <option value="doc3">doc3</option>
+        <option value="doc4">doc4</option>
+        <option value="doc5">doc5</option>
+        <option value="doc6">doc6</option>
+        <option value="doc7">doc7</option>
+        <option value="doc8">doc8</option>
+    </select>
+    <hr/>
+    <div id="zona1">
+    prima zona di visualizzazione dei documenti
+    </div>
+    <hr/>
+    <div id="zona2">
+    seconda zona di visualizzazione dei documenti
+    </div>
+    <hr/>
+    fine documento<br/>
+    <script>
+        document.getElementsByTagName("select")[0].onchange=caricaDocumento;
+        function caricaDocumento(e) {
+            var httpRequest = new XMLHttpRequest();
+            httpRequest.prevTarget = e.target;
+            httpRequest.onreadystatechange = gestisciResponse;
+            httpRequest.open("GET", e.target.value + ".htm", true);
+            httpRequest.send();
+            }
+            function gestisciResponse(e) {
+            if (e.target.readyState == 4 && e.target.status == 200) {
+            var c=e.target.prevTarget.value.charAt(3);
+            if (c<="4") c="1"; else c="2";
+            document.getElementById("zona"+c).innerHTML = e.target.responseText;
+            }
+        }
+    </script>
+    </body>
+</html>

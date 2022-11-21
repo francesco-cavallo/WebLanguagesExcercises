@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+    <html>
+        <head>
+            <style>
+                tr.M {color:blue; font-family: "Courier New";}
+                tr.F {color:red; font-family: Arial;}
+            </style>
+            <script>
+                function inizializzaStorageUtenti(){
+                if (typeof(localStorage.utenti) == "undefined") {
+                    localStorage.utenti="[]";
+                        }
+                    }
+                function resetStorageUtenti(){
+                    localStorage.utenti="[]";
+                }
+                function stampaStorage(){
+                    var u = JSON.parse(localStorage.utenti);
+                    var l = u.length;
+                    var s = new String("<h3>Stato di localStorage:</h3>");
+                    s +="<table border=1><tr><th>cognome e nome</th><th>data di nascita</th><th>sesso</th></tr>";
+                    for (i=0;i<l;i++)
+                        s += "<tr class="+u[i].sesso+"><td>"+u[i].cogn+"</td><td>"+u[i].data+"</td><td>"+u[i].sesso+"</td></tr>";
+                    s += "</table>";
+                    document.getElementById("vistaStorage").innerHTML = s;
+                    return true;
+                }
+                function inserisciUtente() {
+                    if (document.registrazione.cognome.value=="") {
+                        alert("Inserire cognome");
+                        return false;
+                    }
+                    if (document.registrazione.dataNascita.value=="") {
+                        alert("Inserire data di nascita");
+                        return false;
+                    }
+                    var u = JSON.parse(localStorage.utenti);
+                    var nextpos = u.length;
+                    var o = {   cogn:document.registrazione.cognome.value,
+                                data:document.registrazione.dataNascita.value,
+                                sesso:document.registrazione.sesso.value        };
+                    alert("Dati inseriti correttamente");
+                    u[nextpos] = o;
+                    localStorage.utenti = JSON.stringify(u);
+                    return true;
+                }
+            </script>
+        </head>
+        <body onload="inizializzaStorageUtenti()">
+            <form action="" method="post" name="registrazione" onSubmit="return inserisciUtente();" accept-charset="utf-8">
+                matricola:
+                <input type="text" name="matricola" size="12" maxlength="12"/>
+                <br/>
+                cognome e nome:
+                <input type="text" name="cognome" size="60" maxlength="60"/>
+                <br/>
+                data di nascita:
+                <input type="date" name="dataNascita" size="10" maxlength="10"/>
+                <br/>
+                sesso:
+                <select name="sesso" id="sesso">
+                    4
+                    <option value="F">F</option>
+                    <option value="M">M</option>
+                </select>
+                <br/>
+                corso frequentato:
+                <select name="corso" id="corso">
+                    <option value="Elettronica">Elettronica</option>
+                    <option value="LTW">LTW</option>
+                    <option value="PFP">PFP</option>
+                    <option value="SO">SO</option>
+                </select>
+                <br/>
+                <input type="submit" value="Invia"/>
+                <input type="button" value="Stampa Storage" onclick="stampaStorage();"/>
+                <input type="button" value="Reset Storage" onclick="resetStorageUtenti();"/>
+            </form>
+            <hr/>
+            <div id="vistaStorage"></div>
+            <hr/>
+        </body>
+</html>

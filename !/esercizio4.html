@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+    <body>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js">
+    </script>
+    inizio documento
+    <hr/>
+    <select name="menuDoc">
+        <option value="doc1">doc1</option>
+        <option value="doc2">doc2</option>
+        <option value="doc3">doc3</option>
+        <option value="doc4">doc4</option>
+        <option value="doc5">doc5</option>
+        <option value="doc6">doc6</option>
+        <option value="doc7">doc7</option>
+        <option value="doc8">doc8</option>
+    </select>
+    <hr/>
+    <div id="zona1">
+    prima zona di visualizzazione dei documenti
+    </div>
+    <hr/>
+    <div id="zona2">
+    seconda zona di visualizzazione dei documenti
+    </div>
+    <hr/>
+    fine documento<br/>
+    <script>
+        $(document).ready(function(){
+            $("select").change(function(){
+                var c = this.value.charAt(3);
+                if (c<="4") {
+                    c=1;
+                }
+                else{
+                    c=2;
+                }
+                $("#zona"+c).load(this.value+".htm",
+                    function(responseTxt, statusTxt, xhr){
+                        if (statusTxt=="error") {
+                            alert("Errore" + xhr.status + ": " + xhr.statusTxt);
+                        }
+                    });
+            });
+        });
+    </script>
+    </body>
+</html>
