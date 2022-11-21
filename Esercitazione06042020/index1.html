@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script type="text/javascript" language="javascript">
+        var valoreSesso=null;
+        function controllaCAP(){
+            if (document.esempioform.cap.value.length!=5) {
+                alert("Il CAP deve contenere 5 cifre");
+                return false;
+            }
+            var v=parseInt(document.esempioform.cap.value);
+            if (isNaN(v)) {
+                alert("Il CAP deve essere un numero");
+                return false;
+            }
+            return true;
+        }
+        function controllaNome(){
+            var v=parseInt(document.esempioform.cognomenome.value);
+            if(!isNaN(v)){
+                alert("Il cognome e nome non può essere un numero");
+                return false;
+            }
+            return true;
+        }
+        function validaInvio() {
+            if (document.esempioform.cognomenome.value=="") {
+                alert("Inserire cognome e nome");
+                return false;
+            }
+            if (valoreSesso==null) {
+                alert("Selezionare il sesso");
+                return false;
+            }
+            if (document.esempioform.ateneo.value=="nessuno") {
+                alert("Selezionare un ateneo");
+                return false;
+            }
+            if ((document.esempioform.lavoratore.checked)&&(document.esempioform.descrizlavoro.value=="")) {
+                alert("Hai dichiarato di essere uno studente lavoratore: devi compilare il campo descrizione lavoro");
+                return false;
+            }
+            alert("Dati inseriti correttamente");
+            return true;
+        }
+    </script>
+</head>
+<body>
+    <form action="" method="POST" name="esempioform" onsubmit="return validaInvio();">
+        cognome e nome:
+        <input type="text" name="cognomenome" size="50" maxlength="50" onchange="return controllaNome();">
+        <br>
+        sesso:
+        <input type="radio" name="sesso" value="M" onclick="valoreSesso=this.value;">M
+        <input type="radio" name="sesso" value="F" onclick="valoreSesso=this.value;">F
+        <br>
+        ateneo:
+        <select name="ateneo" >
+            <option value="nessuno" selected></option>
+            <option value="sapienza">La Sapienza</option>
+            <option value="torvergata">Tpr Vergata</option>
+            <option value="romatre">Roma Tre</option>
+        </select>
+        <br>
+        CAP
+        <input type="text" name="cap" size="5" maxlength="5" onchange="return controllaCAP();">
+        <br>
+        sono uno studente lavoratore
+        <input type="checkbox" name="lavoratore">
+        <br>
+        descrizione lavoro:
+        <input type="text" name="descrizlavoro" size="80" maxlength="80">
+        <br>
+        <br>
+        <input type="submit" value="Invia">
+        <input type="reset" value="Reset">
+    </form>
+</body>
+</html>
