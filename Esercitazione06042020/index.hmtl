@@ -1,0 +1,92 @@
+<html>
+    <head>
+        <script>
+            function validaForm(){
+                if(document.registrazione.cognome.value==""){
+                    alert("Inserire cognome");
+                    return false;
+                }
+                if(document.registrazione.nome.value==""){
+                    alert("Inserire nome")
+                    return false;
+                }
+                if (document.registrazione.matricola.value=="") {
+                    alert("Inserire matricola")
+                    return false;
+                }
+                var v=parseInt(document.registrazione.matricola.value);
+                if (isNaN(v)) {
+                    alert("La matricola deve essere un numero");
+                    return false;
+                }
+                if (document.registrazione.regione.value=="nessuna") {
+                    alert("Selezionare una regione");
+                    return false;
+                }
+                if ((document.registrazione.email.value=="")&&(document.registrazione.tel.value=="")) {
+                    alert("Inserire o l'email o il numero di telefono");
+                    return false;
+                }
+                alert("Dati inseriti correttamente");
+                return true;
+            }
+        </script>
+    </head>
+    <body>
+        <form action="" method="POST" name="registrazione" onsubmit="return validaForm();">
+            cognome:
+            <input type="text" name="cognome" size="40" maxlength="40" required>
+            <br>
+            nome:
+            <input type="text" name="nome" size="30" maxlength="30" required>
+            <br>
+            sesso:
+            <input type="radio" name="sesso" value="M">M
+            <input type="radio" name="sesso" value="F">F
+            <br>
+            matricola:
+            <input type="number" name="matricola" size="12" maxlength="12">
+            <br>
+            regione:
+            <select name="regione" >
+                <option value="nessuna" selected></option>
+                <option value="valdaosta">Val d'Aosta</option>
+                <option value="Piemonte">Piemonte</option>
+                <option value="Liguria">Liguria</option>
+                <option value="Lombardia">Lombardia</option>
+                <option value="Veneto">Veneto</option>
+                <option value="Trentino">Trentino Alto Adige</option>
+                <option value="Friuli">Friuli Venezia-Giulia</option>
+                <option value="Emilia">Emilia-Romagna</option>
+                <option value="Toscana">Toscana</option>
+                <option value="Marche">Marche</option>
+                <option value="Umbria">Umbria</option>
+                <option value="Lazio">Lazio</option>
+                <option value="Abruzzo">Abruzzo</option>
+                <option value="Molise">Molise</option>
+                <option value="Campania">Campania</option>
+                <option value="Basilicata">Basilicata</option>
+                <option value="Puglia">Puglia</option>
+                <option value="Calabria">Calabria</option>
+                <option value="Sicilia">Sicilia</option>
+                <option value="Sardegna">Sardegna</option>
+            </select>
+            <br>
+            email:
+            <input type="email" name="email" size="30" maxlength="30">
+            <br>
+            telefono
+            <input type="tel" name="tel" size="15" maxlength="15">
+            <br>
+            studente lavoratore?
+            <input type="checkbox" name="lavoratore" >
+            <br>
+            richieste particolari:
+            <br>
+            <textarea name="richieste" cols="60" rows="12"></textarea>
+            <br>
+            <input type="submit" value="Invia">
+            <input type="reset" value="Reset">
+        </form>
+    </body>
+</html>
